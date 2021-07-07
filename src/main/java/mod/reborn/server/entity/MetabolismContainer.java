@@ -1,8 +1,6 @@
 package mod.reborn.server.entity;
 
-import mod.reborn.client.model.animation.EntityAnimation;
-import mod.reborn.server.util.GameRuleHandler;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 
 public class MetabolismContainer {
@@ -30,7 +28,7 @@ public class MetabolismContainer {
     }
 
     public void update() {
-        if (!this.dinosaur.isDead && !this.dinosaur.isCarcass() && GameRuleHandler.DINO_METABOLISM.getBoolean(this.dinosaur.world)) {
+        if (!this.dinosaur.getShouldBeDead() && !this.dinosaur.isCarcass() && GameRuleHandler.DINO_METABOLISM.getBoolean(this.dinosaur.world)) {
             this.decreaseEnergy(1);
             this.decreaseWater(1);
 
@@ -90,16 +88,16 @@ public class MetabolismContainer {
         this.digestingFood = Math.min(digesting, MAX_DIGESTION_AMOUNT);
     }
 
-    public void readFromNBT(NBTTagCompound nbt) {
-        this.water = nbt.getInteger("Water");
-        this.energy = nbt.getInteger("Energy");
-        this.digestingFood = nbt.getInteger("DigestingFood");
+    public void readFromNBT(CompoundNBT nbt) {
+        this.water = nbt.getInt("Water");
+        this.energy = nbt.getInt("Energy");
+        this.digestingFood = nbt.getInt("DigestingFood");
     }
 
-    public void writeToNBT(NBTTagCompound nbt) {
-        nbt.setInteger("Water", this.water);
-        nbt.setInteger("Energy", this.energy);
-        nbt.setInteger("DigestingFood", this.digestingFood);
+    public void writeToNBT(CompoundNBT nbt) {
+        nbt.putInt("Water", this.water);
+        nbt.putInt("Energy", this.energy);
+        nbt.putInt("DigestingFood", this.digestingFood);
     }
 
     public int getMaxEnergy() {

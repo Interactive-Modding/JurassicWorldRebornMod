@@ -1,21 +1,16 @@
 package mod.reborn.client.model;
 
-import net.ilexiconn.llibrary.client.model.tabula.ITabulaModelAnimator;
-import net.ilexiconn.llibrary.client.model.tabula.container.TabulaModelContainer;
-import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import mod.reborn.server.api.Animatable;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
-import java.util.Map;
 import java.util.Set;
 
-@SideOnly(Side.CLIENT)
+@SideOnly(MixinEnvironment.Side.CLIENT)
 public class AnimatableModel extends FixedTabulaModel {
     public AnimatableModel(TabulaModelContainer model) {
         this(model, null);
+
     }
 
     public AnimatableModel(TabulaModelContainer model, ITabulaModelAnimator animator) {

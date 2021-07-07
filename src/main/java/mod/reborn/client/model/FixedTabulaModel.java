@@ -1,14 +1,8 @@
 package mod.reborn.client.model;
 
-import net.ilexiconn.llibrary.client.model.tabula.ITabulaModelAnimator;
-import net.ilexiconn.llibrary.client.model.tabula.TabulaModel;
-import net.ilexiconn.llibrary.client.model.tabula.container.TabulaCubeContainer;
-import net.ilexiconn.llibrary.client.model.tabula.container.TabulaCubeGroupContainer;
-import net.ilexiconn.llibrary.client.model.tabula.container.TabulaModelContainer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
-@SideOnly(Side.CLIENT)
+@SideOnly(MixinEnvironment.Side.CLIENT)
 public class FixedTabulaModel extends TabulaModel {
     public FixedTabulaModel(TabulaModelContainer container, ITabulaModelAnimator<?> tabulaAnimator) {
         super(container, tabulaAnimator);

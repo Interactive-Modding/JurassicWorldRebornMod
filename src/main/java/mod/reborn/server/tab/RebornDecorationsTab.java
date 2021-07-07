@@ -1,16 +1,15 @@
 package mod.reborn.server.tab;
 
-import java.util.List;
-
 import mod.reborn.server.dinosaur.Dinosaur;
 import mod.reborn.server.entity.EntityHandler;
 import mod.reborn.server.item.DisplayBlockItem;
-import mod.reborn.server.item.ItemHandler;
-
-import net.minecraft.creativetab.CreativeTabs;
+import mod.reborn.server.items.ItemHandler;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-public class RebornDecorationsTab extends CreativeTabs {
+import java.util.List;
+
+public class RebornDecorationsTab extends ItemGroup {
     private int[] metas;
 
     public RebornDecorationsTab(String label) {
@@ -25,7 +24,7 @@ public class RebornDecorationsTab extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return new ItemStack(ItemHandler.DISPLAY_BLOCK);
     }
 }

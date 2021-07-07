@@ -1,19 +1,12 @@
 package mod.reborn.server.util;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import mod.reborn.server.dinosaur.Dinosaur;
-import mod.reborn.server.entity.item.AttractionSignEntity;
-import mod.reborn.server.plant.Plant;
-import mod.reborn.server.plant.PlantHandler;
 
 import java.util.Locale;
 
-@SuppressWarnings("unused")
-public final class LangUtils
-{
+public class LangUtils {
     public static final TranslateKey COLORS = new TranslateKey("color.%s.name");
     public static final TranslateKey PLANTS = new TranslateKey("plants.%s.name");
     public static final TranslateKey LORE = new TranslateKey("lore.%s.name");
@@ -27,42 +20,22 @@ public final class LangUtils
     public static final TranslateKey ENTITY_DESC   = new TranslateKey("entity.%s.desc");
     public static final TranslateKey CONTAINER_INV = new TranslateKey("container.inventory");
 
-    @SuppressWarnings("deprecation")
     public static String translate(String langKey, Object... args) {
-        return net.minecraft.util.text.translation.I18n.canTranslate(langKey)
-                       ? net.minecraft.util.text.translation.I18n.translateToLocalFormatted(langKey, args)
-                       : langKey;
+        return I18n.hasKey(langKey)
+                ? I18n.format(langKey, args)
+                : langKey;
     }
 
     public static String translate(TranslateKey langKey, Object... args) {
         return translate(langKey.key, args);
     }
 
-    @SuppressWarnings("deprecation")
     public static String translateOrDefault(String langKey, String defaultVal) {
-        return net.minecraft.util.text.translation.I18n.canTranslate(langKey) ? translate(langKey) : defaultVal;
+        return I18n.hasKey(langKey) ? translate(langKey) : defaultVal;
     }
 
     public static String translateOrDefault(TranslateKey langKey, String defaultVal) {
         return translateOrDefault(langKey.key, defaultVal);
-    }
-
-    public static String translateEntityCls(Class<? extends Entity> eClass) {
-        String namedEntry = EntityList.getTranslationName(EntityList.getKey(eClass));
-        if( namedEntry != null ) {
-            return translate(ENTITY_NAME.get(namedEntry));
-        }
-
-        return "[UNKNOWN] " + eClass.getName();
-    }
-
-    public static String translateEntityClsDesc(Class<? extends Entity> eClass) {
-        String namedEntry = EntityList.getTranslationName(EntityList.getKey(eClass));
-        if( namedEntry != null ) {
-            return translate(ENTITY_DESC.get(namedEntry));
-        }
-
-        return "";
     }
 
     public static String getFormattedQuality(int quality) {
@@ -82,7 +55,7 @@ public final class LangUtils
     }
 
     public static String getAttractionSignName(ItemStack stack) {
-        return translate("attraction_sign." + (AttractionSignEntity.AttractionSignType.values()[stack.getItemDamage()].name().toLowerCase(Locale.ENGLISH)) + ".name");
+        return translate("attraction_sign." + (AttractionSignEntity.AttractionSignType.values()[stack.getDamage()].name().toLowerCase(Locale.ENGLISH)) + ".name");
     }
 
     public static String getGenderMode(int mode) {

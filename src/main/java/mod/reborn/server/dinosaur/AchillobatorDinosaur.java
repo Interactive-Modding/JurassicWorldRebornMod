@@ -4,11 +4,11 @@ import mod.reborn.server.entity.Diet;
 import mod.reborn.server.entity.dinosaur.AchillobatorEntity;
 import mod.reborn.server.period.TimePeriod;
 import net.minecraft.world.biome.Biome;
-import java.util.ArrayList;
 import net.minecraftforge.common.BiomeDictionary;
 
-public class AchillobatorDinosaur extends Dinosaur
-{
+import java.util.ArrayList;
+
+public class AchillobatorDinosaur extends Dinosaur {
     public static final double SPEED = 0.4F;
     public AchillobatorDinosaur() {
         super();
@@ -47,11 +47,11 @@ public class AchillobatorDinosaur extends Dinosaur
                 {"foot_bones", "foot_bones", "", ""}};
         this.setRecipe(recipe);
 
-        ArrayList<Biome> biomeList = new ArrayList<Biome>();
-        biomeList.addAll(BiomeDictionary.getBiomes(BiomeDictionary.Type.JUNGLE));
-        biomeList.addAll(BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST));
-        biomeList.addAll(BiomeDictionary.getBiomes(BiomeDictionary.Type.DENSE));
-        biomeList.addAll(BiomeDictionary.getBiomes(BiomeDictionary.Type.SAVANNA));
+        ArrayList<Biome> biomeList = new ArrayList<>();
+        biomeList.addAll(new ArrayList(BiomeDictionary.getBiomes(BiomeDictionary.Type.JUNGLE)));
+        biomeList.addAll(new ArrayList(BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST)));
+        biomeList.addAll(new ArrayList(BiomeDictionary.getBiomes(BiomeDictionary.Type.DENSE)));
+        biomeList.addAll(new ArrayList(BiomeDictionary.getBiomes(BiomeDictionary.Type.SAVANNA)));
         this.setSpawn(1, biomeList.toArray(new Biome[biomeList.size()]));
         doSkeletonCheck();
     }

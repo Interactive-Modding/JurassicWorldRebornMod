@@ -1,32 +1,17 @@
 package mod.reborn.server.dinosaur;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.vecmathimpl.Matrix4d;
-import javax.vecmathimpl.Vector3d;
-
 import mod.reborn.RebornMod;
-import mod.reborn.client.model.animation.PoseHandler;
-import mod.reborn.server.api.GrowthStageGenderContainer;
-import mod.reborn.server.api.Hybrid;
 import mod.reborn.server.entity.Diet;
 import mod.reborn.server.entity.DinosaurEntity;
 import mod.reborn.server.entity.GrowthStage;
 import mod.reborn.server.entity.SleepTime;
-import mod.reborn.server.entity.ai.util.MovementType;
 import mod.reborn.server.period.TimePeriod;
-import mod.reborn.server.tabula.TabulaModelHelper;
-
-import net.ilexiconn.llibrary.client.model.tabula.container.TabulaCubeContainer;
-import net.ilexiconn.llibrary.client.model.tabula.container.TabulaModelContainer;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+
+import javax.vecmathimpl.Matrix4d;
+import java.util.*;
 
 public abstract class Dinosaur implements Comparable<Dinosaur> {
     private final Map<GrowthStage, List<ResourceLocation>> overlays = new HashMap<>();
@@ -194,16 +179,16 @@ public abstract class Dinosaur implements Comparable<Dinosaur> {
             if (!this.doesSupportGrowthStage(growthStage)) {
                 growthStageName = GrowthStage.ADULT.name().toLowerCase(Locale.ENGLISH);
             }
-            this.maleTextures.put(growthStage, new ResourceLocation(RebornMod.MODID, baseTextures + formattedName + "_male_" + growthStageName + ".png"));
-            this.femaleTextures.put(growthStage, new ResourceLocation(RebornMod.MODID, baseTextures + formattedName + "_female_" + growthStageName + ".png"));
-            this.eyelidTextures.put(new GrowthStageGenderContainer(growthStage, true), new ResourceLocation(RebornMod.MODID, baseTextures + formattedName + "_male_" + growthStageName + "_eyelid.png"));
-            this.eyelidTextures.put(new GrowthStageGenderContainer(growthStage, false), new ResourceLocation(RebornMod.MODID, baseTextures + formattedName + "_female_" + growthStageName + "_eyelid.png"));
+            this.maleTextures.put(growthStage, new ResourceLocation(RebornMod.MOD_ID, baseTextures + formattedName + "_male_" + growthStageName + ".png"));
+            this.femaleTextures.put(growthStage, new ResourceLocation(RebornMod.MOD_ID, baseTextures + formattedName + "_female_" + growthStageName + ".png"));
+            this.eyelidTextures.put(new GrowthStageGenderContainer(growthStage, true), new ResourceLocation(RebornMod.MOD_ID, baseTextures + formattedName + "_male_" + growthStageName + "_eyelid.png"));
+            this.eyelidTextures.put(new GrowthStageGenderContainer(growthStage, false), new ResourceLocation(RebornMod.MOD_ID, baseTextures + formattedName + "_female_" + growthStageName + "_eyelid.png"));
 
 
             List<ResourceLocation> overlaysForGrowthStage = new ArrayList<>();
 
             for (int i = 1; i <= this.getOverlayCount(); i++) {
-                overlaysForGrowthStage.add(new ResourceLocation(RebornMod.MODID, baseTextures + formattedName + "_overlay_" + growthStageName + "_" + i + ".png"));
+                overlaysForGrowthStage.add(new ResourceLocation(RebornMod.MOD_ID, baseTextures + formattedName + "_overlay_" + growthStageName + "_" + i + ".png"));
             }
 
             this.overlays.put(growthStage, overlaysForGrowthStage);
@@ -820,7 +805,7 @@ public abstract class Dinosaur implements Comparable<Dinosaur> {
         return this.recipe;
     }
 
-    public void applyMeatEffect(EntityPlayer player, boolean cooked) {
+    public void applyMeatEffect(PlayerEntity player, boolean cooked) {
     }
 
     public enum DinosaurType {

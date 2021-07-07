@@ -1,21 +1,14 @@
 package mod.reborn.client.model.animation;
 
-import mod.reborn.client.model.AnimatableModel;
-import net.ilexiconn.llibrary.client.model.tabula.ITabulaModelAnimator;
-import net.ilexiconn.llibrary.client.model.tabula.TabulaModel;
-import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import mod.reborn.server.api.Animatable;
 import mod.reborn.server.entity.GrowthStage;
+import net.minecraft.entity.LivingEntity;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
 import java.util.EnumMap;
-import java.util.Map;
 import java.util.WeakHashMap;
 
-@SideOnly(Side.CLIENT)
-public abstract class EntityAnimator<ENTITY extends EntityLivingBase & Animatable> implements ITabulaModelAnimator<ENTITY> {
+@SideOnly(MixinEnvironment.Side.CLIENT)
+public abstract class EntityAnimator<ENTITY extends LivingEntity & Animatable> implements ITabulaModelAnimator<ENTITY> {
     protected EnumMap<GrowthStage, Map<ENTITY, JabelarAnimationHandler<ENTITY>>> animationHandlers = new EnumMap<>(GrowthStage.class);
 
     private JabelarAnimationHandler<ENTITY> getAnimationHelper(ENTITY entity, AnimatableModel model, boolean useInertialTweens) {
